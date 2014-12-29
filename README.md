@@ -16,10 +16,22 @@ so if a commands seems outdated, refers to that training guide
 ##Requirements
 
  * you have already downloaded the last android SDK
+ * you have added the directory containing the android SDK binaries
+in your `PATH` variable, for me it was for example
+`~/Downloads/android-sdk-linux/tools`
 
 ##Vim configuration
 
 ##Creating the project
+
+```
+android create project \
+    --target 1 \
+    --name VerbisteAndroid
+    --path . \
+    --activity MainActivity \
+    --package com.allansimon.verbisteandroid
+```
 
 ##Compiling
 
