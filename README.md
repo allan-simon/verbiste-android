@@ -17,11 +17,16 @@ so if a commands seems outdated, refers to that training guide
 
  * you have already downloaded the last android SDK
  * you have added the directory containing the android SDK binaries
+ * you're using Pathogen to handle your vim plugins
 in your `PATH` variable, for me it was for example
 `~/Downloads/android-sdk-linux/tools` and
 `~/Downloads/android-sdk-linux/platform-tools`
 
 ##Vim configuration
+
+    * git clone https://github.com/vim-scripts/javacomplete
+    * git clone https://github.com/hsanson/vim-android
+
 
 ##Creating the project
 
@@ -44,6 +49,11 @@ just plug in USB your device (be sure to have activated developer options) and t
 
 ```adb install -r bin/VerbisteAndroid-debug.apk```
 (`-r` is to indicate we want to reinstall)
+
+##Running app in debug mode
+
+simply run the script ```./utils/debug.sh .```
+(see the file to if you need to understand the magic)
 
 ##Running unit test
 
