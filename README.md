@@ -18,7 +18,8 @@ so if a commands seems outdated, refers to that training guide
  * you have already downloaded the last android SDK
  * you have added the directory containing the android SDK binaries
 in your `PATH` variable, for me it was for example
-`~/Downloads/android-sdk-linux/tools`
+`~/Downloads/android-sdk-linux/tools` and
+`~/Downloads/android-sdk-linux/platform-tools`
 
 ##Vim configuration
 
@@ -35,7 +36,14 @@ android create project \
 
 ##Compiling
 
+from the command line ``ant debug```
+
 ##Pushing the apk to a device
+
+just plug in USB your device (be sure to have activated developer options) and then
+
+```adb install -r bin/VerbisteAndroid-debug.apk```
+(`-r` is to indicate we want to reinstall)
 
 ##Running unit test
 
