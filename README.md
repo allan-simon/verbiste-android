@@ -9,6 +9,10 @@ The database is licensed under GPLv2 as required by verbiste project
 
 #How the project has been created from command line and vim
 
+first of all a lot of the command line can be found in the actual
+[android training guide](https://developer.android.com/training/index.html),
+so if a commands seems outdated, refers to that training guide
+
 ##Requirements
 
  * you have already downloaded the last android SDK
