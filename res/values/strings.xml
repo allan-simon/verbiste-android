@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Verbiste Android</string>
+    <string name="activity_conjugation">Verve Android - Conjugation</string>
     <string name="enter_verb">Type a French verb</string>
     <string name="button_conjugate">Conjugate</string>
 </resources>

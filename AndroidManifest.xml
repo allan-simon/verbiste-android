@@ -18,6 +18,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name="DisplayConjugationActivity"
+            android:label="@string/activity_conjugation"
+        >
+        </activity>
     </application>
 
 </manifest>
