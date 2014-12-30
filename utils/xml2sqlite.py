@@ -1,7 +1,7 @@
 #!/bin/env python3
 from xml.dom import minidom
 import sqlite3
-conn = sqlite3.connect('../db/example.db')
+conn = sqlite3.connect('../assets/conjugation.db')
 
 def get_text(node):
     if node.firstChild == None:
@@ -15,13 +15,13 @@ def get_first(node, childClass):
 
 
 xmldoc = minidom.parse('../data/verbs-fr.xml')
-verbs = xmldoc.getElementsByTagName('v'); 
+verbs = xmldoc.getElementsByTagName('v');
 
 
 verbTypes = {}
 verbTypesCounter = 1
 
-# we build the list of verbs 
+# we build the list of verbs
 conn.execute(
     '''
     CREATE TABLE verb (
@@ -274,4 +274,8 @@ conn.execute(
     JOIN conjugation c ON t.id = c.verb_type_id
     '''
 )
+
+# Android metadata
+conn.execute('CREATE TABLE android_metadata (locale TEXT);')
+conn.execute('INSERT INTO android_metadata VALUES ("en_US");')
 conn.commit()
