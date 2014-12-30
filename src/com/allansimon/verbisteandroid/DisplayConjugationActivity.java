@@ -41,11 +41,15 @@ public class DisplayConjugationActivity extends ActionBarActivity
         while (cursor.moveToNext()) {
             TableRow row = new TableRow(this);
 
+            String person = cursor.getString(2);
+            TextView personView = new TextView(this);
+            personView.setText(person + " ");
+            row.addView(personView);
+
             String radical = cursor.getString(0);
             TextView radicalView = new TextView(this);
             radicalView.setText(radical);
             row.addView(radicalView);
-
 
             String suffix = cursor.getString(1);
             TextView suffixView = new TextView(this);
@@ -78,10 +82,17 @@ public class DisplayConjugationActivity extends ActionBarActivity
             //times, so no need for string building ;-)
             "SELECT " +
             "    radical, " +
-            "    suffix " +
+            "    suffix, " +
+            "    CASE h_aspired " +
+            "        WHEN 0 THEN p.base " +
+            "        ELSE p.with_h_aspired " +
+            "    END as person_text, " +
+            "    mode, " +
+            "    tense " +
             "FROM verb v " +
             "JOIN verb_type t ON v.verb_type_id = t.id " +
             "JOIN conjugation c ON v.verb_type_id = c.verb_type_id " +
+            "JOIN person p ON p.id = c.person " +
             "WHERE v.infinitive = ? " +
             "ORDER BY mode, tense, person;",
             params

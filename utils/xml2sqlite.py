@@ -275,6 +275,31 @@ conn.execute(
     '''
 )
 
+# Insert person
+conn.execute(
+    '''
+    CREATE TABLE person (
+        id INT PRIMARY KEY,
+        base text,
+        with_h_aspired text
+    )
+    '''
+)
+conn.execute(
+    '''
+    INSERT INTO person
+    VALUES
+        (1,    "",      ""),
+        (2,   "je",   "j'"),
+        (3,   "tu",   "tu"),
+        (4,   "il",   "il"),
+        (5, "nous", "nous"),
+        (6, "vous", "vous"),
+        (7,  "ils",  "ils")
+    '''
+)
+conn.commit()
+
 # Android metadata
 conn.execute('CREATE TABLE android_metadata (locale TEXT);')
 conn.execute('INSERT INTO android_metadata VALUES ("en_US");')
