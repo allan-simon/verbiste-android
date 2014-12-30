@@ -23,6 +23,10 @@
             android:name="DisplayConjugationActivity"
             android:label="@string/activity_conjugation"
         >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.allansimon.verbisteandroid.MainActivity"
+            />
         </activity>
     </application>
     <uses-sdk

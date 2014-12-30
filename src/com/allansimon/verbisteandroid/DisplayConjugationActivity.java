@@ -1,16 +1,24 @@
 package com.allansimon.verbisteandroid;
 
-import android.app.Activity;
-import android.os.Bundle;
+import com.allansimon.verbisteandroid.MainActivity;
 
-public class DisplayConjugationActivity extends Activity
+import android.support.v7.app.ActionBarActivity;
+import android.os.Bundle;
+import android.content.Intent;
+import android.widget.TextView;
+
+public class DisplayConjugationActivity extends ActionBarActivity
 {
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.conjugation);
+        Intent intent = getIntent();
+        String verb = intent.getStringExtra(MainActivity.EXTRA_VERB);
+        TextView textView = new TextView(this);
+        textView.setTextSize(40);
+        textView.setText(verb);
+        setContentView(textView);
     }
-
 
 
 }
