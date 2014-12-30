@@ -2,13 +2,13 @@ package com.allansimon.verbisteandroid;
 
 import com.allansimon.verbisteandroid.DisplayConjugationActivity;
 
-import android.app.Activity;
+import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.content.Intent;
 import android.widget.EditText;
 
-public class MainActivity extends Activity
+public class MainActivity extends ActionBarActivity
 {
     public final static String EXTRA_VERB = "com.allansimon.verbisteandroid.MESSAGE";
     /** Called when the activity is first created. */

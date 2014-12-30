@@ -16,6 +16,7 @@ so if a commands seems outdated, refers to that training guide
 ##Requirements
 
  * you have already downloaded the last android SDK
+ * you have downloaded the Android Support Library
  * you have added the directory containing the android SDK binaries
  * you're using Pathogen to handle your vim plugins
 in your `PATH` variable, for me it was for example
@@ -38,6 +39,25 @@ android create project \
     --activity MainActivity \
     --package com.allansimon.verbisteandroid
 ```
+
+then add the link to appcompat v7 (Note, it **MUST** be a relative path)
+
+```
+android update project \
+    --target 1 \
+    --path . \
+    --library ../path/to/android-sdk-linux/extras/android/support/v7/appcompat
+```
+
+you also need to generate a build.xml for that library, go in the
+`extras/android/support/v7/appcompat`
+
+and run
+
+```
+android update project --target 1 -p .
+```
+
 
 ##Compiling
 
