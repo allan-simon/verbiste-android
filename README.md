@@ -23,11 +23,18 @@ in your `PATH` variable, for me it was for example
 `~/Downloads/android-sdk-linux/tools` and
 `~/Downloads/android-sdk-linux/platform-tools`
 
+ * you've added these environment variables `ANDROID_HOME` and `ANDROID_SDK`
+both pointing to the path of your SDK
+
 ##Vim configuration
 
     * git clone https://github.com/vim-scripts/javacomplete
     * git clone https://github.com/hsanson/vim-android
+    * git clone https://github.com/bpowell/vim-android
 
+the two vim-android are actually slightly different, also for
+`bpowell/vim-android` I did edit the installation script to not compile
+supertab and the "textmate" plugin and I needed to install exuberant-ctags
 
 ##Creating the project
 
