@@ -36,9 +36,31 @@ public class DisplayConjugationActivity extends ActionBarActivity
             R.id.conjugation_table
         );
 
+        int previousMode = -1;
+        int previousTense = -1;
         Cursor cursor = getConjugationsOf(verb);
-        cursor.moveToFirst();
-        while (cursor.moveToNext()) {
+        for (cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()) {
+
+            // insert a new line after a new mode
+            if (previousMode != cursor.getInt(3)) {
+                TableRow row = new TableRow(this);
+                TextView empty = new TextView(this);
+                empty.setText(" ");
+                row.addView(empty);
+                tableLayout.addView(row);
+                previousMode = cursor.getInt(3);
+            }
+
+            // insert a new line after a new tense
+            if (previousTense != cursor.getInt(4)) {
+                TableRow row = new TableRow(this);
+                TextView empty = new TextView(this);
+                empty.setText(" ");
+                row.addView(empty);
+                tableLayout.addView(row);
+                previousTense = cursor.getInt(4);
+            }
+
             TableRow row = new TableRow(this);
 
             String person = cursor.getString(2);
