@@ -82,7 +82,8 @@ public class DisplayConjugationActivity extends ActionBarActivity
             "FROM verb v " +
             "JOIN verb_type t ON v.verb_type_id = t.id " +
             "JOIN conjugation c ON v.verb_type_id = c.verb_type_id " +
-            "WHERE v.infinitive = ?;",
+            "WHERE v.infinitive = ? " +
+            "ORDER BY mode, tense, person;",
             params
         );
 
