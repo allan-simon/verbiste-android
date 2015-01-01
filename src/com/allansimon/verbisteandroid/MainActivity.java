@@ -27,4 +27,14 @@ public class MainActivity extends ActionBarActivity
         intent.putExtra(EXTRA_VERB, verb);
         startActivity(intent);
     }
+
+    public void deconjugate(View view)
+    {
+        Intent intent = new Intent(this, DeconjugationActivity.class);
+        EditText enterVerb = (EditText) findViewById(R.id.enter_deconjugate);
+        String verb = enterVerb.getText().toString();
+        intent.putExtra(EXTRA_VERB, verb);
+        startActivity(intent);
+    }
+
 }

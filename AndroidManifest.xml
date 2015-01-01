@@ -28,6 +28,15 @@
                 android:value="com.allansimon.verbisteandroid.MainActivity"
             />
         </activity>
+        <activity
+            android:name="DeconjugationActivity"
+            android:label="@string/activity_deconjugation"
+        >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.allansimon.verbisteandroid.MainActivity"
+            />
+        </activity>
     </application>
     <uses-sdk
       android:minSdkVersion="7"

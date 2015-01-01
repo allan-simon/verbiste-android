@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Verbiste Android</string>
-    <string name="activity_conjugation">Verve Android - Conjugation</string>
+    <string name="activity_conjugation">Verbiste Android - Conjugation</string>
     <string name="enter_verb">Type a French verb</string>
     <string name="button_conjugate">Conjugate</string>
+
+    <string name="activity_deconjugation">Verbiste Android - Deconjugation</string>
+    <string name="enter_deconjugate">Type a conjugated verb</string>
+    <string name="button_deconjugate">Deconjugate</string>
 </resources>
