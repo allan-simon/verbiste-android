@@ -275,6 +275,56 @@ conn.execute(
     '''
 )
 
+# Insert mode
+conn.execute(
+    '''
+    CREATE TABLE mode (
+        id INT PRIMARY KEY,
+        text
+    )
+    '''
+)
+
+conn.execute(
+    '''
+    INSERT INTO mode
+    VALUES
+        (1,  'infinitive'),
+        (2,  'indicative'),
+        (3, 'conditional'),
+        (4, 'subjunctive'),
+        (5,  'imperative'),
+        (6,  'imperative')
+    '''
+)
+conn.commit()
+
+# Insert tense
+conn.execute(
+    '''
+    CREATE TABLE tense (
+        id INT PRIMARY KEY,
+        text
+    )
+    '''
+)
+
+conn.execute(
+    '''
+    INSERT INTO tense
+    VALUES
+        (1,     'present'),
+        (2,     'present'),
+        (3,   'imperfect'),
+        (4,      'future'),
+        (5, 'simple past'),
+        (6,     'present'),
+        (7,     'present'),
+        (8,        'past')
+    '''
+)
+conn.commit()
+
 # Insert person
 conn.execute(
     '''
