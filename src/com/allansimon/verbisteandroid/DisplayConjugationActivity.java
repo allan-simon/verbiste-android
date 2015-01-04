@@ -16,6 +16,7 @@ import android.graphics.Color;
 
 import android.database.sqlite.SQLiteDatabase;
 import android.database.Cursor;
+import android.database.DatabaseUtils;
 
 import android.util.Log;
 
@@ -97,7 +98,23 @@ public class DisplayConjugationActivity extends ActionBarActivity
         );
         database = dbOpenHelper.openDataBase();
 
+        String infinitiveColumn = "infinitive";
         String[] params = {verb};
+
+        // check if we can find a verb with that infinitive
+        boolean foundInfinitive = 0 < DatabaseUtils.longForQuery(
+            database,
+            "SELECT COUNT(*) FROM verb WHERE infinitive= ?",
+            params
+        );
+
+        // if we've not found the "original" infinitive
+        // we will look for the ascii version of it,
+        // in case the user as type the verb without accent
+        if (!foundInfinitive) {
+            infinitiveColumn = "infinitive_ascii";
+        }
+
         //TODO replace rawQuery by call to the right methods
         return database.rawQuery(
             //concatenation of static strings is optimized at compile
@@ -115,7 +132,7 @@ public class DisplayConjugationActivity extends ActionBarActivity
             "JOIN verb_type t ON v.verb_type_id = t.id " +
             "JOIN conjugation c ON v.verb_type_id = c.verb_type_id " +
             "JOIN person p ON p.id = c.person " +
-            "WHERE v.infinitive = ? " +
+            "WHERE v." + infinitiveColumn + " = ? " +
             "ORDER BY mode, tense, person;",
             params
         );
