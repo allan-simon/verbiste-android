@@ -1,6 +1,7 @@
 #!/bin/env python3
 from xml.dom import minidom
 import sqlite3
+import unicodedata
 conn = sqlite3.connect('../assets/conjugation.db')
 
 def get_text(node):
@@ -12,6 +13,11 @@ def get_first(node, childClass):
     return node.getElementsByTagName(childClass)[0]
 
 
+def remove_accents(input_str):
+    if input_str is None:
+        return None
+    nkfd_form = unicodedata.normalize('NFKD', input_str)
+    return u"".join([c for c in nkfd_form if not unicodedata.combining(c)])
 
 
 xmldoc = minidom.parse('../data/verbs-fr.xml')
@@ -28,7 +34,9 @@ conn.execute(
         id INTEGER PRIMARY KEY,
         verb_type_id INTEGER,
         infinitive TEXT,
+        infinitive_ascii TEXT,
         radical TEXT,
+        radical_ascii TEXT,
         h_aspired BOOL
     )
     '''
@@ -44,11 +52,14 @@ for oneVerb in verbs:
         verbTypesCounter += 1
 
     verbTypeId = verbTypes[verbType]
+    radical = infinitive[:-len(verbType.split(':')[1])]
     conn.execute(
         '''
         INSERT INTO verb
         VALUES(
             NULL,
+            ?,
+            ?,
             ?,
             ?,
             ?,
@@ -58,9 +69,11 @@ for oneVerb in verbs:
         [
             verbTypeId,
             infinitive,
+            remove_accents(infinitive),
             #to get the radical we remove the suffix part that we
             #got from the verb type
-            infinitive[:-len(verbType.split(':')[1])],
+            radical,
+            remove_accents(radical),
             isInitialHPronounced
         ]
     )
@@ -134,7 +147,8 @@ conn.execute(
         mode INTEGER NOT NULL,
         tense INTEGER NOT NULL,
         person INTEGER NOT NULL,
-        suffix TEXT DEFAULT NULL
+        suffix TEXT DEFAULT NULL,
+        suffix_ascii TEXT DEFAULT NULL
     )
     '''
 )
@@ -161,6 +175,7 @@ def parse_tense(
                     ?,
                     ?,
                     ?,
+                    ?,
                     ?
                 )
                 ''',
@@ -169,7 +184,8 @@ def parse_tense(
                     MODES[mode.tagName],
                     TENSES[tense_name],
                     person_id,
-                    inflection
+                    inflection,
+                    remove_accents(inflection)
                 ]
             )
 
@@ -256,7 +272,8 @@ conn.execute(
         id INTEGER PRIMARY KEY,
         conjugation_id INTEGER NOT NULL,
         verb_id INTEGER NOT NULL,
-        conjugated TEXT
+        conjugated TEXT,
+        conjugated_ascii TEXT
     )
     '''
 )
@@ -268,7 +285,8 @@ conn.execute(
         NULL,
         c.id,
         v.id,
-        radical || suffix
+        radical || suffix,
+        radical_ascii || suffix_ascii
     FROM verb v
     JOIN verb_type t ON t.id = v.verb_type_id
     JOIN conjugation c ON t.id = c.verb_type_id
