@@ -76,6 +76,9 @@ android update project --target 1 -p .
 
 from the command line ``ant debug```
 
+for some obscure reason, make sure your path in `local.properties`
+is a **RELATIVE PATH**
+
 ##Pushing the apk to a device
 
 just plug in USB your device (be sure to have activated developer options) and then
