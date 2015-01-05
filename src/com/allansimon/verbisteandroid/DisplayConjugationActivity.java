@@ -13,6 +13,9 @@ import android.widget.TableLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import android.text.SpannableString;
+import android.text.style.ForegroundColorSpan;
+
 import android.view.LayoutInflater;
 
 import android.graphics.Color;
@@ -104,21 +107,18 @@ public class DisplayConjugationActivity extends ActionBarActivity
         String radical,
         String suffix
     ) {
-        // TODO: certainly there's a better way to put radical and suffix
-        // in same TextView using SpannedString
-        LinearLayout linear = new LinearLayout(this);
+        TextView view = createTextView();
+        SpannableString text = new SpannableString(radical + suffix);
+        text.setSpan(
+            new ForegroundColorSpan(Color.RED),
+            radical.length(),
+            radical.length() + suffix.length(),
+            0
+        );
 
-        TextView radicalView = createTextView();
-        radicalView.setText(radical);
+        view.setText(text);
 
-        TextView suffixView = createTextView();
-        suffixView.setTextColor(Color.RED);
-        suffixView.setText(suffix);
-
-        linear.addView(radicalView);
-        linear.addView(suffixView);
-
-        row.addView(linear);
+        row.addView(view);
     }
 
     /**
@@ -179,7 +179,9 @@ public class DisplayConjugationActivity extends ActionBarActivity
     private TextView createTextView()
     {
         LayoutInflater inflater = getLayoutInflater();
-        return (TextView) inflater.inflate(R.layout.text_view, null);
+        TextView view = (TextView) inflater.inflate(R.layout.text_view, null);
+        view.setTextIsSelectable(true);
+        return view;
     }
 
     /**
