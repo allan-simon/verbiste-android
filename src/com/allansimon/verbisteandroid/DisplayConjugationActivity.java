@@ -10,7 +10,10 @@ import android.content.Intent;
 import android.widget.TableRow;
 import android.widget.TableRow.LayoutParams;
 import android.widget.TableLayout;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import android.view.LayoutInflater;
 
 import android.graphics.Color;
 
@@ -45,9 +48,8 @@ public class DisplayConjugationActivity extends ActionBarActivity
             // insert a new line after a new mode
             if (previousMode != cursor.getInt(3)) {
                 TableRow row = new TableRow(this);
-                TextView empty = new TextView(this);
-                empty.setText(" ");
-                row.addView(empty);
+
+                addTextColumn(row, " ");
                 tableLayout.addView(row);
                 previousMode = cursor.getInt(3);
             }
@@ -55,9 +57,8 @@ public class DisplayConjugationActivity extends ActionBarActivity
             // insert a new line after a new tense
             if (previousTense != cursor.getInt(4)) {
                 TableRow row = new TableRow(this);
-                TextView empty = new TextView(this);
-                empty.setText(" ");
-                row.addView(empty);
+
+                addTextColumn(row, " ");
                 tableLayout.addView(row);
                 previousTense = cursor.getInt(4);
             }
@@ -65,26 +66,59 @@ public class DisplayConjugationActivity extends ActionBarActivity
             TableRow row = new TableRow(this);
 
             String person = cursor.getString(2);
-            TextView personView = new TextView(this);
-            personView.setText(person + " ");
-            row.addView(personView);
+            addTextColumn(row, person + " ");
+
 
             String radical = cursor.getString(0);
-            TextView radicalView = new TextView(this);
-            radicalView.setText(radical);
-            row.addView(radicalView);
-
             String suffix = cursor.getString(1);
-            TextView suffixView = new TextView(this);
-            suffixView.setTextColor(Color.RED);
-            suffixView.setText(suffix);
-            row.addView(suffixView);
+            addConjugatedColumn(
+                row,
+                radical,
+                suffix
+            );
 
             tableLayout.addView(row);
 
         }
         cursor.close();
 
+    }
+
+    /**
+     *
+     */
+    private void addTextColumn(
+        TableRow row,
+        String text
+    ) {
+        TextView view = createTextView();
+        view.setText(text);
+        row.addView(view);
+    }
+
+    /**
+     *
+     */
+    private void addConjugatedColumn(
+        TableRow row,
+        String radical,
+        String suffix
+    ) {
+        // TODO: certainly there's a better way to put radical and suffix
+        // in same TextView using SpannedString
+        LinearLayout linear = new LinearLayout(this);
+
+        TextView radicalView = createTextView();
+        radicalView.setText(radical);
+
+        TextView suffixView = createTextView();
+        suffixView.setTextColor(Color.RED);
+        suffixView.setText(suffix);
+
+        linear.addView(radicalView);
+        linear.addView(suffixView);
+
+        row.addView(linear);
     }
 
     /**
@@ -137,6 +171,15 @@ public class DisplayConjugationActivity extends ActionBarActivity
             params
         );
 
+    }
+
+    /**
+     *
+     */
+    private TextView createTextView()
+    {
+        LayoutInflater inflater = getLayoutInflater();
+        return (TextView) inflater.inflate(R.layout.text_view, null);
     }
 
     /**

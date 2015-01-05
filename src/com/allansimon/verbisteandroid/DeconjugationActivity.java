@@ -12,6 +12,8 @@ import android.widget.TableRow.LayoutParams;
 import android.widget.TableLayout;
 import android.widget.TextView;
 
+import android.view.LayoutInflater;
+
 import android.graphics.Color;
 
 import android.database.sqlite.SQLiteDatabase;
@@ -58,7 +60,8 @@ public class DeconjugationActivity extends ActionBarActivity
 
     private void addTextColumn(TableRow row, String text)
     {
-        TextView view = new TextView(this);
+        LayoutInflater inflater = getLayoutInflater();
+        TextView view = (TextView) inflater.inflate(R.layout.text_view, null);
         view.setText(text);
         row.addView(view);
     }
