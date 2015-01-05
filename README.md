@@ -13,6 +13,9 @@ cd utils ; python xml2sqlite.py
 
 The database is licensed under GPLv2 as required by verbiste project
 
+the code is licensed under MIT license (I need to add the 'official'
+copyright notice)
+
 #How the project has been created from command line and vim
 
 first of all a lot of the command line can be found in the actual
