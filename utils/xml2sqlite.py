@@ -19,6 +19,13 @@ def remove_accents(input_str):
     nkfd_form = unicodedata.normalize('NFKD', input_str)
     return u"".join([c for c in nkfd_form if not unicodedata.combining(c)])
 
+def hash_32_bit(input_str):
+    import hashlib
+    return int(
+        hashlib.md5(infinitive.encode('utf-8')).hexdigest()[-8:],
+        16
+    )
+
 
 xmldoc = minidom.parse('../data/verbs-fr.xml')
 verbs = xmldoc.getElementsByTagName('v');
@@ -34,7 +41,9 @@ conn.execute(
         id INTEGER PRIMARY KEY,
         verb_type_id INTEGER,
         infinitive TEXT,
+        infinitive_hash INT,
         infinitive_ascii TEXT,
+        infinitive_ascii_hash TEXT,
         radical TEXT,
         radical_ascii TEXT,
         h_aspired BOOL
@@ -63,13 +72,17 @@ for oneVerb in verbs:
             ?,
             ?,
             ?,
+            ?,
+            ?,
             ?
         )
         ''',
         [
             verbTypeId,
             infinitive,
+            hash_32_bit(infinitive),
             remove_accents(infinitive),
+            hash_32_bit(remove_accents(infinitive)),
             #to get the radical we remove the suffix part that we
             #got from the verb type
             radical,
