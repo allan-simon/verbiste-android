@@ -38,10 +38,9 @@ verbTypesCounter = 1
 conn.execute(
     '''
     CREATE TABLE verb (
-        id INTEGER PRIMARY KEY,
+        _id INTEGER PRIMARY KEY,
         verb_type_id INTEGER,
         infinitive TEXT,
-        infinitive_hash INT,
         infinitive_ascii TEXT,
         infinitive_ascii_hash TEXT,
         radical TEXT,
@@ -62,11 +61,11 @@ for oneVerb in verbs:
 
     verbTypeId = verbTypes[verbType]
     radical = infinitive[:-len(verbType.split(':')[1])]
+
     conn.execute(
         '''
         INSERT INTO verb
         VALUES(
-            NULL,
             ?,
             ?,
             ?,
@@ -78,9 +77,10 @@ for oneVerb in verbs:
         )
         ''',
         [
+
+            hash_32_bit(infinitive),
             verbTypeId,
             infinitive,
-            hash_32_bit(infinitive),
             remove_accents(infinitive),
             hash_32_bit(remove_accents(infinitive)),
             #to get the radical we remove the suffix part that we
@@ -90,6 +90,12 @@ for oneVerb in verbs:
             isInitialHPronounced
         ]
     )
+conn.execute(
+    '''
+    CREATE INDEX idx_verb_infinitive_ascii_hash
+    ON verb (infinitive_ascii_hash ASC)
+    '''
+);
 conn.commit()
 
 # we build the list of verb types
@@ -297,7 +303,7 @@ conn.execute(
     SELECT
         NULL,
         c.id,
-        v.id,
+        v._id,
         radical || suffix,
         radical_ascii || suffix_ascii
     FROM verb v

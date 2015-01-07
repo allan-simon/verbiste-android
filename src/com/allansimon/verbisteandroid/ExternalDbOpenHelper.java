@@ -102,7 +102,7 @@ public class ExternalDbOpenHelper extends SQLiteOpenHelper {
             database = SQLiteDatabase.openDatabase(
                 path,
                 null,
-                SQLiteDatabase.OPEN_READWRITE
+                SQLiteDatabase.OPEN_READWRITE | SQLiteDatabase.NO_LOCALIZED_COLLATORS
             );
         }
         return database;
