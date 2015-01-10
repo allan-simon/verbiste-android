@@ -149,6 +149,17 @@ FIRST_PLURAL = 5
 SECOND_PLURAL = 6
 THIRD_PLURAL = 7
 
+SECOND_SINGULAR_IMPERATIVE = 8
+FIRST_PLURAL_IMPERATIVE = 9
+SECOND_PLURAL_IMPERATIVE = 10
+
+# TODO for participle find something better
+MASCULIN_SINGULAR = 11
+FEMININ_SINGULAR = 12
+MASCULIN_PLURAL = 13
+FEMININ_PLURAL = 14
+
+
 PERSONS_NORMAL_TENSE = frozenset([
     FIRST_SINGULAR,
     SECOND_SINGULAR,
@@ -157,6 +168,19 @@ PERSONS_NORMAL_TENSE = frozenset([
     SECOND_PLURAL,
     THIRD_PLURAL
 ])
+
+PERSONS_IMPERATIVE_TENSE = frozenset([
+    SECOND_SINGULAR_IMPERATIVE,
+    FIRST_PLURAL_IMPERATIVE,
+    SECOND_PLURAL_IMPERATIVE
+])
+
+FORMS_PAST_PARTICIPLE = frozenset([
+    MASCULIN_SINGULAR,
+    FEMININ_SINGULAR,
+    MASCULIN_PLURAL,
+    FEMININ_PLURAL
+]);
 
 conn.execute(
     '''
@@ -251,7 +275,7 @@ for oneTemplate in templates:
         verbTypeId,
         mode,
         'imperative-present',
-        persons_id_for_that_tense=[SECOND_SINGULAR, FIRST_PLURAL, SECOND_PLURAL]
+        persons_id_for_that_tense=PERSONS_IMPERATIVE_TENSE
     )
 
     #participle
@@ -273,12 +297,7 @@ for oneTemplate in templates:
         # feminine singular
         # masculine plural
         # feminine plural
-        persons_id_for_that_tense=[
-            FIRST_SINGULAR,
-            THIRD_SINGULAR,
-            FIRST_PLURAL,
-            THIRD_PLURAL
-        ]
+        persons_id_for_that_tense=FORMS_PAST_PARTICIPLE
     )
 
 conn.commit()
@@ -382,7 +401,16 @@ conn.execute(
         (4,   "il",   "il"),
         (5, "nous", "nous"),
         (6, "vous", "vous"),
-        (7,  "ils",  "ils")
+        (7,  "ils",  "ils"),
+        -- imperative
+        (8,  "",  ""),
+        (9,  "",  ""),
+        (10,  "",  ""),
+        -- past participle
+        (11, "", ""),
+        (12, "", ""),
+        (13, "", ""),
+        (14, "", "")
     '''
 )
 conn.commit()
