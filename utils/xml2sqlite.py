@@ -22,7 +22,7 @@ def remove_accents(input_str):
 def hash_32_bit(input_str):
     import hashlib
     return int(
-        hashlib.md5(infinitive.encode('utf-8')).hexdigest()[-8:],
+        hashlib.md5(input_str.encode('utf-8')).hexdigest()[-8:],
         16
     )
 
