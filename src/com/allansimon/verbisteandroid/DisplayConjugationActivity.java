@@ -194,7 +194,8 @@ public class DisplayConjugationActivity extends ActionBarActivity
     private String getVerb()
     {
         Intent intent = getIntent();
-        return intent.getStringExtra(MainActivity.EXTRA_VERB);
+        String verb = intent.getStringExtra(MainActivity.EXTRA_VERB);
+        return verb.trim();
     }
 
     /**
