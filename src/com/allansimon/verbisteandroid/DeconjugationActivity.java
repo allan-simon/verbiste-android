@@ -88,13 +88,13 @@ public class DeconjugationActivity extends ActionBarActivity
             "    t.text as tense_text, " +
             "    base as person_text " +
             "FROM conjugated_form cf " +
-            "JOIN verb v ON v.id = cf.verb_id " +
+            "JOIN verb v ON v._id = cf.verb_id " +
             "JOIN conjugation c ON cf.conjugation_id = c.id " +
             "JOIN person p ON p.id = c.person " +
             "JOIN tense t ON t.id = c.tense " +
             "JOIN mode m ON m.id = c.mode " +
             "WHERE conjugated = ? " +
-            "ORDER BY v.id;",
+            "ORDER BY v._id;",
             params
         );
 
