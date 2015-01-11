@@ -4,6 +4,7 @@
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
+    android:padding="10dp"
 >
     <LinearLayout
         android:orientation="horizontal"
@@ -15,12 +16,14 @@
             android:hint="@string/enter_verb"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
         />
         <Button
             android:text="@string/button_conjugate"
             android:onClick="conjugate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
         />
     </LinearLayout>
     <LinearLayout
@@ -33,12 +36,14 @@
             android:hint="@string/enter_verb"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
         />
         <Button
             android:text="@string/button_deconjugate"
             android:onClick="deconjugate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
         />
     </LinearLayout>
 </LinearLayout>
