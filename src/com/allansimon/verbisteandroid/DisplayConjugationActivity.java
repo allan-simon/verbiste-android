@@ -184,7 +184,6 @@ public class DisplayConjugationActivity extends ActionBarActivity
     {
         LayoutInflater inflater = getLayoutInflater();
         TextView view = (TextView) inflater.inflate(R.layout.text_view, null);
-        view.setTextIsSelectable(true);
         return view;
     }
 
