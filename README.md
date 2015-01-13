@@ -45,6 +45,20 @@ the two vim-android are actually slightly different, also for
 `bpowell/vim-android` I did edit the installation script to not compile
 supertab and the "textmate" plugin and I needed to install exuberant-ctags
 
+## Other cli tools
+
+### logcat in color in your terminal
+
+```
+sudo pip install logcat-color
+```
+
+and then use the command
+
+```
+logcat color
+```
+
 ##Creating the project
 
 ```
