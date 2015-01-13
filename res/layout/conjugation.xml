@@ -5,10 +5,10 @@
     android:layout_height="wrap_content"
     android:padding="10dp"
 >
-    <TableLayout
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/conjugation_table"
-    >
-    </TableLayout>
+        android:id="@+id/full_conjugation"
+    />
 </ScrollView>

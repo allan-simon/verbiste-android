@@ -42,30 +42,34 @@ public class DisplayConjugationActivity extends ActionBarActivity
 
         String verb = getVerb();
 
-        TableLayout tableLayout = (TableLayout) findViewById(
-            R.id.conjugation_table
+        LinearLayout linearLayout = (LinearLayout) findViewById(
+            R.id.full_conjugation
         );
 
         int previousMode = -1;
         int previousTense = -1;
         Cursor cursor = getConjugationsOf(verb);
+        TableLayout oneTense = null;
         for (cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()) {
 
             // insert a new line after a new mode
             if (previousMode != cursor.getInt(3)) {
-                TableRow row = new TableRow(this);
+                TextView textView = createTextView();
+                textView.setText("an other mode");
+                linearLayout.addView(textView);
 
-                addTextColumn(row, " ");
-                tableLayout.addView(row);
                 previousMode = cursor.getInt(3);
             }
 
             // insert a new line after a new tense
             if (previousTense != cursor.getInt(4)) {
-                TableRow row = new TableRow(this);
-
-                addTextColumn(row, " ");
-                tableLayout.addView(row);
+                if (oneTense != null) {
+                    TextView textView = createTextView();
+                    textView.setText("an other tense");
+                    linearLayout.addView(textView);
+                    linearLayout.addView(oneTense);
+                }
+                oneTense = createTenseLayout();
                 previousTense = cursor.getInt(4);
             }
 
@@ -83,7 +87,7 @@ public class DisplayConjugationActivity extends ActionBarActivity
                 suffix
             );
 
-            tableLayout.addView(row);
+            oneTense.addView(row);
 
         }
         cursor.close();
@@ -180,10 +184,24 @@ public class DisplayConjugationActivity extends ActionBarActivity
     /**
      *
      */
+    private TableLayout createTenseLayout()
+    {
+        TableLayout view = (TableLayout) getLayoutInflater().inflate(
+            R.layout.conjugation_part_full_tense,
+            null
+        );
+        return view;
+    }
+
+    /**
+     *
+     */
     private TextView createTextView()
     {
-        LayoutInflater inflater = getLayoutInflater();
-        TextView view = (TextView) inflater.inflate(R.layout.text_view, null);
+        TextView view = (TextView) getLayoutInflater().inflate(
+            R.layout.text_view,
+            null
+        );
         return view;
     }
 
