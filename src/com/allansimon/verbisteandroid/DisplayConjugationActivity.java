@@ -16,6 +16,8 @@ import android.widget.TableLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import android.view.ViewGroup;
+
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
 
@@ -54,7 +56,7 @@ public class DisplayConjugationActivity extends ActionBarActivity
 
             // insert a new line after a new mode
             if (previousMode != cursor.getInt(3)) {
-                TextView textView = createTextView();
+                TextView textView = createModeTitle(linearLayout);
                 textView.setText("an other mode");
                 linearLayout.addView(textView);
 
@@ -64,7 +66,7 @@ public class DisplayConjugationActivity extends ActionBarActivity
             // insert a new line after a new tense
             if (previousTense != cursor.getInt(4)) {
                 if (oneTense != null) {
-                    TextView textView = createTextView();
+                    TextView textView = createTenseTitle(linearLayout);
                     textView.setText("an other tense");
                     linearLayout.addView(textView);
                     linearLayout.addView(oneTense);
@@ -77,7 +79,6 @@ public class DisplayConjugationActivity extends ActionBarActivity
 
             String person = cursor.getString(2);
             addTextColumn(row, person + " ");
-
 
             String radical = cursor.getString(0);
             String suffix = cursor.getString(1);
@@ -204,6 +205,31 @@ public class DisplayConjugationActivity extends ActionBarActivity
         );
         return view;
     }
+
+    /**
+     *
+     */
+    private TextView createTenseTitle(ViewGroup container)
+    {
+        return (TextView) getLayoutInflater().inflate(
+            R.layout.conjugation_part_tense_title,
+            container,
+            false
+        );
+    }
+
+    /**
+     *
+     */
+    private TextView createModeTitle(ViewGroup container)
+    {
+        return (TextView) getLayoutInflater().inflate(
+            R.layout.conjugation_part_mode_title,
+            container,
+            false
+        );
+    }
+
 
     /**
      *
