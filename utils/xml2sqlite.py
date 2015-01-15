@@ -244,7 +244,7 @@ for oneTemplate in templates:
     mode = get_first(oneTemplate, 'infinitive')
 
     parse_tense(
-        radical,
+        verbTypeId,
         mode,
         'infinitive-present',
         persons_id_for_that_tense=[NOBODY]
