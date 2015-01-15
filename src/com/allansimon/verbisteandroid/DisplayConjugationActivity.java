@@ -34,6 +34,12 @@ import android.util.Log;
 public class DisplayConjugationActivity extends ActionBarActivity
 {
     private static final String DB_NAME = "conjugation.db";
+    //TODO replace by a enum
+    private static final int RADICAL_COLUMN = 0 ;
+    private static final int SUFFIX_COLUMN = 1 ;
+    private static final int PERSON_COLUMN = 2 ;
+    private static final int MODE_COLUMN = 3 ;
+    private static final int TENSE_COLUMN = 4 ;
 
     private SQLiteDatabase database;
 
@@ -55,16 +61,16 @@ public class DisplayConjugationActivity extends ActionBarActivity
         for (cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()) {
 
             // insert a new line after a new mode
-            if (previousMode != cursor.getInt(3)) {
+            if (previousMode != cursor.getInt(MODE_COLUMN)) {
                 TextView textView = createModeTitle(linearLayout);
                 textView.setText("an other mode");
                 linearLayout.addView(textView);
 
-                previousMode = cursor.getInt(3);
+                previousMode = cursor.getInt(MODE_COLUMN);
             }
 
             // insert a new line after a new tense
-            if (previousTense != cursor.getInt(4)) {
+            if (previousTense != cursor.getInt(TENSE_COLUMN)) {
                 if (oneTense != null) {
                     TextView textView = createTenseTitle(linearLayout);
                     textView.setText("an other tense");
@@ -72,16 +78,16 @@ public class DisplayConjugationActivity extends ActionBarActivity
                     linearLayout.addView(oneTense);
                 }
                 oneTense = createTenseLayout();
-                previousTense = cursor.getInt(4);
+                previousTense = cursor.getInt(TENSE_COLUMN);
             }
 
             TableRow row = new TableRow(this);
 
-            String person = cursor.getString(2);
+            String person = cursor.getString(PERSON_COLUMN);
             addTextColumn(row, person + " ");
 
-            String radical = cursor.getString(0);
-            String suffix = cursor.getString(1);
+            String radical = cursor.getString(RADICAL_COLUMN);
+            String suffix = cursor.getString(SUFFIX_COLUMN);
             addConjugatedColumn(
                 row,
                 radical,
