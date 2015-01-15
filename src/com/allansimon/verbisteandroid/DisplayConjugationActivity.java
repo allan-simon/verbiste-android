@@ -53,32 +53,45 @@ public class DisplayConjugationActivity extends ActionBarActivity
         LinearLayout linearLayout = (LinearLayout) findViewById(
             R.id.full_conjugation
         );
+        String tenses[] = getResources().getStringArray(R.array.tenses);
+        String modes[] = getResources().getStringArray(R.array.modes);
 
-        int previousMode = -1;
-        int previousTense = -1;
+        // TODO it would be certainly better and easier to
+        // understand if we were first looping on the cursor
+        // to create an aggregate of verbs by tense by mode
+        // and only then using this aggregate to build the layout
+        int currentMode = -1;
+        int currentTense = -1;
         Cursor cursor = getConjugationsOf(verb);
-        TableLayout oneTense = null;
+        TableLayout oneTenseTable = null;
         for (cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()) {
 
+            boolean isNewMode = currentMode != cursor.getInt(MODE_COLUMN);
+            boolean IsNewTense =
+                currentTense != cursor.getInt(TENSE_COLUMN) ||
+                isNewMode;
+
+            currentMode = cursor.getInt(MODE_COLUMN);
+            currentTense = cursor.getInt(TENSE_COLUMN);
+
+            if (IsNewTense && oneTenseTable != null) {
+                linearLayout.addView(oneTenseTable);
+            }
+
             // insert a new line after a new mode
-            if (previousMode != cursor.getInt(MODE_COLUMN)) {
+            if (isNewMode) {
                 TextView textView = createModeTitle(linearLayout);
-                textView.setText("an other mode");
+                textView.setText(modes[currentMode]);
                 linearLayout.addView(textView);
 
-                previousMode = cursor.getInt(MODE_COLUMN);
             }
 
             // insert a new line after a new tense
-            if (previousTense != cursor.getInt(TENSE_COLUMN)) {
-                if (oneTense != null) {
-                    TextView textView = createTenseTitle(linearLayout);
-                    textView.setText("an other tense");
-                    linearLayout.addView(textView);
-                    linearLayout.addView(oneTense);
-                }
-                oneTense = createTenseLayout();
-                previousTense = cursor.getInt(TENSE_COLUMN);
+            if (IsNewTense) {
+                TextView textView = createTenseTitle(linearLayout);
+                textView.setText(tenses[currentTense]);
+                linearLayout.addView(textView);
+                oneTenseTable = createTenseLayout();
             }
 
             TableRow row = new TableRow(this);
@@ -94,9 +107,14 @@ public class DisplayConjugationActivity extends ActionBarActivity
                 suffix
             );
 
-            oneTense.addView(row);
+            oneTenseTable.addView(row);
 
         }
+
+        if (oneTenseTable != null) {
+            linearLayout.addView(oneTenseTable);
+        }
+
         cursor.close();
 
     }

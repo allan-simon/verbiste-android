@@ -8,4 +8,24 @@
     <string name="activity_deconjugation">Verbiste Android - Deconjugation</string>
     <string name="enter_deconjugate">Type a conjugated verb</string>
     <string name="button_deconjugate">Deconjugate</string>
+
+    <string-array name="modes">
+        <item>infinitive</item>
+        <item>indicative</item>
+        <item>conditional</item>
+        <item>subjunctive</item>
+        <item>imperative</item>
+        <item>particple</item>
+    </string-array>
+
+    <string-array name="tenses">
+        <item>present</item>
+        <item>present</item>
+        <item>imperfect</item>
+        <item>future</item>
+        <item>simple past</item>
+        <item>present</item>
+        <item>present</item>
+        <item>past</item>
+    </string-array>
 </resources>
