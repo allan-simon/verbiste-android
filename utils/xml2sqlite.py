@@ -350,7 +350,7 @@ conn.execute(
         (3, 'conditional'),
         (4, 'subjunctive'),
         (5,  'imperative'),
-        (6,  'imperative')
+        (6,  'participle')
     '''
 )
 conn.commit()
