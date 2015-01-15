@@ -122,42 +122,42 @@ xmldoc = minidom.parse('../data/conjugation-fr.xml')
 
 # we build the list of type of conjugation
 MODES = {
-    'infinitive' : 1,
-    'indicative' : 2,
-    'conditional' : 3,
-    'subjunctive' : 4,
-    'imperative' : 5,
-    'participle' : 6
+    'infinitive' : 0,
+    'indicative' : 1,
+    'conditional' : 2,
+    'subjunctive' : 3,
+    'imperative' : 4,
+    'participle' : 5
 }
 
 TENSES = {
-    'infinitive-present' : 1,
-    'present' : 2,
-    'imperfect' : 3,
-    'future' : 4,
-    'simple-past' : 5,
-    'imperative-present' : 6,
-    'present-participle' : 7,
-    'past-participle' : 8
+    'infinitive-present' : 0,
+    'present' : 1,
+    'imperfect' : 2,
+    'future' : 3,
+    'simple-past' : 4,
+    'imperative-present' : 5,
+    'present-participle' : 6,
+    'past-participle' : 7
 }
 
-NOBODY = 1 #for infinitive and participle
-FIRST_SINGULAR = 2
-SECOND_SINGULAR = 3
-THIRD_SINGULAR = 4
-FIRST_PLURAL = 5
-SECOND_PLURAL = 6
-THIRD_PLURAL = 7
+NOBODY = 0 #for infinitive and participle
+FIRST_SINGULAR = 1
+SECOND_SINGULAR = 2
+THIRD_SINGULAR = 3
+FIRST_PLURAL = 4
+SECOND_PLURAL = 5
+THIRD_PLURAL = 6
 
-SECOND_SINGULAR_IMPERATIVE = 8
-FIRST_PLURAL_IMPERATIVE = 9
-SECOND_PLURAL_IMPERATIVE = 10
+SECOND_SINGULAR_IMPERATIVE = 7
+FIRST_PLURAL_IMPERATIVE = 8
+SECOND_PLURAL_IMPERATIVE = 9
 
 # TODO for participle find something better
-MASCULIN_SINGULAR = 11
-FEMININ_SINGULAR = 12
-MASCULIN_PLURAL = 13
-FEMININ_PLURAL = 14
+MASCULIN_SINGULAR = 10
+FEMININ_SINGULAR = 11
+MASCULIN_PLURAL = 12
+FEMININ_PLURAL = 13
 
 
 PERSONS_NORMAL_TENSE = frozenset([
@@ -345,12 +345,12 @@ conn.execute(
     '''
     INSERT INTO mode
     VALUES
-        (1,  'infinitive'),
-        (2,  'indicative'),
-        (3, 'conditional'),
-        (4, 'subjunctive'),
-        (5,  'imperative'),
-        (6,  'participle')
+        (0,  'infinitive'),
+        (1,  'indicative'),
+        (2, 'conditional'),
+        (3, 'subjunctive'),
+        (4,  'imperative'),
+        (5,  'participle')
     '''
 )
 conn.commit()
@@ -369,14 +369,14 @@ conn.execute(
     '''
     INSERT INTO tense
     VALUES
+        (0,     'present'),
         (1,     'present'),
-        (2,     'present'),
-        (3,   'imperfect'),
-        (4,      'future'),
-        (5, 'simple past'),
+        (2,   'imperfect'),
+        (3,      'future'),
+        (4, 'simple past'),
+        (5,     'present'),
         (6,     'present'),
-        (7,     'present'),
-        (8,        'past')
+        (7,        'past')
     '''
 )
 conn.commit()
@@ -395,22 +395,22 @@ conn.execute(
     '''
     INSERT INTO person
     VALUES
-        (1,    "",      ""),
-        (2,   "je",   "j'"),
-        (3,   "tu",   "tu"),
-        (4,   "il",   "il"),
-        (5, "nous", "nous"),
-        (6, "vous", "vous"),
-        (7,  "ils",  "ils"),
+        (0,    "",      ""),
+        (1,   "je",   "j'"),
+        (2,   "tu",   "tu"),
+        (3,   "il",   "il"),
+        (4, "nous", "nous"),
+        (5, "vous", "vous"),
+        (6,  "ils",  "ils"),
         -- imperative
+        (7,  "",  ""),
         (8,  "",  ""),
         (9,  "",  ""),
-        (10,  "",  ""),
         -- past participle
+        (10, "", ""),
         (11, "", ""),
         (12, "", ""),
-        (13, "", ""),
-        (14, "", "")
+        (13, "", "")
     '''
 )
 conn.commit()
