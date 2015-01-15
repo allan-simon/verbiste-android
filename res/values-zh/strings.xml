@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Verbiste Android</string>
+    <string name="activity_conjugation">Verbiste Android - Conjugation</string>
+    <string name="enter_verb">Type a French verb</string>
+    <string name="button_conjugate">Conjugate</string>
+
+    <string name="activity_deconjugation">Verbiste Android - Deconjugation</string>
+    <string name="enter_deconjugate">Type a conjugated verb</string>
+    <string name="button_deconjugate">Deconjugate</string>
+
+    <string-array name="modes">
+        <item>不定式</item>
+        <item>直陈式</item>
+        <item>条件式</item>
+        <item>虚拟式</item>
+        <item>命令式</item>
+        <item>particple</item>
+    </string-array>
+
+    <string-array name="tenses"> 
+        <item>现在时</item>
+        <item>现在时</item>
+        <item>未完成过去时</item>
+        <item>简单将来时</item>
+        <item>简单过去时</item>
+        <item>现在时</item>
+        <item>现在时</item>
+        <item>过去时</item>
+    </string-array>
+</resources>
