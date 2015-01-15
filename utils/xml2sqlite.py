@@ -262,7 +262,7 @@ for oneTemplate in templates:
     mode = get_first(oneTemplate, 'conditional')
 
     parse_tense(verbTypeId, mode, 'present')
-#Subjunctive
+    #Subjunctive
     mode = get_first(oneTemplate, 'subjunctive')
 
     parse_tense(verbTypeId, mode, 'present')
