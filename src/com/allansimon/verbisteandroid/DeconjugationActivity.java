@@ -47,6 +47,9 @@ public class DeconjugationActivity extends ActionBarActivity
 
             TableRow row = new TableRow(this);
 
+            String infinitive = cursor.getString(0);
+            addTextColumn(row, infinitive + " ");
+
             int modeId = cursor.getInt(1);
             addTextColumn(row, modes[modeId] + " ");
 
@@ -62,6 +65,7 @@ public class DeconjugationActivity extends ActionBarActivity
     {
         LayoutInflater inflater = getLayoutInflater();
         TextView view = (TextView) inflater.inflate(R.layout.text_view, null);
+        view.setTextIsSelectable(true);
         view.setText(text);
         row.addView(view);
     }
