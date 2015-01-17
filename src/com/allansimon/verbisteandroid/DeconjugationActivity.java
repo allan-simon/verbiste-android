@@ -39,19 +39,19 @@ public class DeconjugationActivity extends ActionBarActivity
 
         String verb = getVerb();
 
+        String tenses[] = getResources().getStringArray(R.array.tenses);
+        String modes[] = getResources().getStringArray(R.array.modes);
+
         Cursor cursor = getDeconjugationsOf(verb);
         for (cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()) {
 
             TableRow row = new TableRow(this);
 
-            String mode = cursor.getString(0);
-            addTextColumn(row, mode + " ");
+            int modeId = cursor.getInt(1);
+            addTextColumn(row, modes[modeId] + " ");
 
-            String tense = cursor.getString(1);
-            addTextColumn(row, tense + " ");
-
-            String person = cursor.getString(2);
-            addTextColumn(row, person);
+            int tenseId = cursor.getInt(2);
+            addTextColumn(row, tenses[tenseId] + " ");
 
             tableLayout.addView(row);
         }
@@ -84,15 +84,12 @@ public class DeconjugationActivity extends ActionBarActivity
             //times, so no need for string building ;-)
             "SELECT " +
             "    infinitive, " +
-            "    m.text as mode_text, " +
-            "    t.text as tense_text, " +
-            "    base as person_text " +
+            "    c.mode as mode, " +
+            "    c.tense as tense, " +
+            "    c.person as person " +
             "FROM conjugated_form cf " +
             "JOIN verb v ON v._id = cf.verb_id " +
             "JOIN conjugation c ON cf.conjugation_id = c.id " +
-            "JOIN person p ON p.id = c.person " +
-            "JOIN tense t ON t.id = c.tense " +
-            "JOIN mode m ON m.id = c.mode " +
             "WHERE conjugated = ? " +
             "ORDER BY v._id;",
             params
