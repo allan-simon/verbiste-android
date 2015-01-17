@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Verbiste Android</string>
-    <string name="activity_conjugation">Verbiste Android - Conjugation</string>
-    <string name="enter_verb">Type a French verb</string>
-    <string name="button_conjugate">Conjugate</string>
+    <string name="app_name">法语动词</string>
+    <string name="activity_conjugation">法语动词 - 变位</string>
+    <string name="enter_verb">输入法语动词</string>
+    <string name="button_conjugate">变位</string>
 
-    <string name="activity_deconjugation">Verbiste Android - Deconjugation</string>
-    <string name="enter_deconjugate">Type a conjugated verb</string>
-    <string name="button_deconjugate">Deconjugate</string>
+    <string name="activity_deconjugation">法语动词 - 找不定式</string>
+    <string name="enter_deconjugate">输入变位后动词</string>
+    <string name="button_deconjugate">找不定式</string>
 
     <string-array name="modes">
         <item>不定式</item>
@@ -15,7 +15,7 @@
         <item>条件式</item>
         <item>虚拟式</item>
         <item>命令式</item>
-        <item>particple</item>
+        <item>participle</item>
     </string-array>
 
     <string-array name="tenses"> 
