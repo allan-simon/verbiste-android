@@ -81,7 +81,7 @@ public class DeconjugationActivity extends ActionBarActivity
         );
         database = dbOpenHelper.openDataBase();
 
-        String[] params = {verb};
+        String[] params = {verb, verb};
         //TODO replace rawQuery by call to the right methods
         return database.rawQuery(
             //concatenation of static strings is optimized at compile
@@ -94,7 +94,7 @@ public class DeconjugationActivity extends ActionBarActivity
             "FROM conjugated_form cf " +
             "JOIN verb v ON v._id = cf.verb_id " +
             "JOIN conjugation c ON cf.conjugation_id = c.id " +
-            "WHERE conjugated = ? " +
+            "WHERE conjugated = ? OR conjugated_ascii = ? " +
             "ORDER BY v._id;",
             params
         );
