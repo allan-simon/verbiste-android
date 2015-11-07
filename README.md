@@ -64,7 +64,7 @@ logcat color
 ```
 android create project \
     --target 1 \
-    --name VerbisteAndroid
+    --name VerbisteAndroid \
     --path . \
     --activity MainActivity \
     --package com.allansimon.verbisteandroid
