@@ -330,6 +330,21 @@ conn.execute(
     JOIN conjugation c ON t.id = c.verb_type_id
     '''
 )
+conn.execute(
+    '''
+    CREATE INDEX idx_conjugated_form_conjugated
+    ON conjugated_form (conjugated ASC)
+    '''
+);
+
+conn.execute(
+    '''
+    CREATE INDEX idx_conjugated_form_conjugated_ascii
+    ON conjugated_form (conjugated_ascii ASC)
+    '''
+);
+
+
 
 # Insert mode
 conn.execute(
