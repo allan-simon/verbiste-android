@@ -28,4 +28,12 @@
         <item>现在时</item>
         <item>过去时</item>
     </string-array>
+
+    <string-array name="composedtenses">
+        <item></item>
+        <item>复合过去时</item>
+        <item>愈过去时</item>
+        <item>先将来时</item>
+        <item>先过去时</item>
+    </string-array>
 </resources>
