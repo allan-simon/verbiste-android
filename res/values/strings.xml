@@ -29,9 +29,9 @@
         <item>past</item>
     </string-array>
 
-    <string-array name="composedtenses">
+    <string-array name="compoundtenses">
         <item></item>
-        <item>composed past</item>
+        <item>compound past</item>
         <item>pluperfect</item>
         <item>future perfect</item>
         <item>past perfect</item>

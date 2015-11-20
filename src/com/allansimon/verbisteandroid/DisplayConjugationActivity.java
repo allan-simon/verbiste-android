@@ -331,7 +331,7 @@ public class DisplayConjugationActivity extends ActionBarActivity
            return; 
         } 
 
-        String tenses[] = getResources().getStringArray(R.array.composedtenses);
+        String tenses[] = getResources().getStringArray(R.array.compoundtenses);
 
         String pastParticple = getPastParticiple(verb);
 
