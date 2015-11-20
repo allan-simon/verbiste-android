@@ -28,4 +28,12 @@
         <item>present</item>
         <item>past</item>
     </string-array>
+
+    <string-array name="composedtenses">
+        <item></item>
+        <item>composed past</item>
+        <item>pluperfect</item>
+        <item>future perfect</item>
+        <item>past perfect</item>
+    </string-array>
 </resources>

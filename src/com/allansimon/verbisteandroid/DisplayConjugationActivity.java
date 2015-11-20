@@ -41,6 +41,11 @@ public class DisplayConjugationActivity extends ActionBarActivity
     private static final int MODE_COLUMN = 3 ;
     private static final int TENSE_COLUMN = 4 ;
 
+    //
+    private static final int INDICATIVE_MODE = 1;
+    private static final String PARTICIPLE_PAST_TENSE = "7";
+    private static final String PARTICIPLE_BASE = "10";
+
     private SQLiteDatabase database;
 
     public void onCreate(Bundle savedInstanceState)
@@ -61,25 +66,34 @@ public class DisplayConjugationActivity extends ActionBarActivity
         // to create an aggregate of verbs by tense by mode
         // and only then using this aggregate to build the layout
         int currentMode = -1;
+        int previousMode = -1;
         int currentTense = -1;
         Cursor cursor = getConjugationsOf(verb);
         TableLayout oneTenseTable = null;
         for (cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()) {
 
             boolean isNewMode = currentMode != cursor.getInt(MODE_COLUMN);
-            boolean IsNewTense =
+            boolean isNewTense =
                 currentTense != cursor.getInt(TENSE_COLUMN) ||
                 isNewMode;
 
+
+            previousMode = currentMode;
             currentMode = cursor.getInt(MODE_COLUMN);
             currentTense = cursor.getInt(TENSE_COLUMN);
 
-            if (IsNewTense && oneTenseTable != null) {
+            if (isNewTense && oneTenseTable != null) {
                 linearLayout.addView(oneTenseTable);
             }
 
             // insert a new line after a new mode
             if (isNewMode) {
+                addComposedTense(
+                    linearLayout,
+                    previousMode,
+                    verb
+                );
+
                 TextView textView = createModeTitle(linearLayout);
                 textView.setText(modes[currentMode]);
                 linearLayout.addView(textView);
@@ -87,7 +101,7 @@ public class DisplayConjugationActivity extends ActionBarActivity
             }
 
             // insert a new line after a new tense
-            if (IsNewTense) {
+            if (isNewTense) {
                 TextView textView = createTenseTitle(linearLayout);
                 textView.setText(tenses[currentTense]);
                 linearLayout.addView(textView);
@@ -156,6 +170,104 @@ public class DisplayConjugationActivity extends ActionBarActivity
     /**
      *
      */
+    private String getPastParticiple(String verb)
+    {
+        String hash = String.valueOf(hash32Bits(verb));
+        //TODO replace rawQuery by call to the right methods
+        Cursor cursor = database.rawQuery(
+            //concatenation of static strings is optimized at compile
+            //times, so no need for string building ;-)
+            "SELECT " +
+            "    radical, " +
+            "    suffix " +
+            "FROM verb v " +
+            "JOIN verb_type t ON v.verb_type_id = t.id " +
+            "JOIN conjugation c ON v.verb_type_id = c.verb_type_id " +
+            "WHERE " +
+            "    ( " +
+            "          v._id = " + hash + " OR " +
+            "          v.infinitive_ascii_hash = " + hash +
+            "    ) AND " +
+            "    tense = " + PARTICIPLE_PAST_TENSE + " AND " +
+            "    c.person = " + PARTICIPLE_BASE + " " +
+            "ORDER BY mode, tense, person;",
+            null
+        );
+        for (cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()) {
+            String radical = cursor.getString(RADICAL_COLUMN);
+            String suffix = cursor.getString(SUFFIX_COLUMN);
+            cursor.close();
+            return radical+suffix;
+        }
+        return "REPORT A BUG";
+    }
+
+
+
+    /**
+     *
+     */
+    private Cursor getAuxilliaryConjugation(String verb)
+    {
+        verb = verb.toLowerCase();
+
+        String auxilliary = "avoir";
+        // TODO: hack: it should be it in the database I think
+        if (
+            verb.equals("devenir") ||
+            verb.equals("revenir") ||
+            verb.equals("monter") ||
+            verb.equals("rester") ||
+            verb.equals("sortir") ||
+            verb.equals("venir") ||
+            verb.equals("aller") ||
+            verb.equals("naître") ||
+            verb.equals("naitre") ||
+            verb.equals("descendre") ||
+            verb.equals("entrer") ||
+            verb.equals("retourner") ||
+            verb.equals("tomber") ||
+            verb.equals("rentrer") ||
+            verb.equals("arriver") ||
+            verb.equals("mourir") ||
+            verb.equals("partir")
+        ) {
+            auxilliary = "être";
+        }
+
+
+        String hash = String.valueOf(hash32Bits(auxilliary));
+        //TODO replace rawQuery by call to the right methods
+        return database.rawQuery(
+            //concatenation of static strings is optimized at compile
+            //times, so no need for string building ;-)
+            "SELECT " +
+            "    radical, " +
+            "    suffix, " +
+            "    CASE h_aspired " +
+            "        WHEN 0 THEN p.base " +
+            "        ELSE p.with_h_aspired " +
+            "    END as person_text, " +
+            "    mode, " +
+            "    tense " +
+            "FROM verb v " +
+            "JOIN verb_type t ON v.verb_type_id = t.id " +
+            "JOIN conjugation c ON v.verb_type_id = c.verb_type_id " +
+            "JOIN person p ON p.id = c.person " +
+            "WHERE " +
+            "    v._id = " + hash + " AND " +
+            "    mode = " + INDICATIVE_MODE + " AND " +
+            "    tense IN (1, 2, 3, 4) " +
+            "ORDER BY mode, tense, person;",
+            null
+        );
+
+
+    }
+
+    /**
+     *
+     */
     private Cursor getConjugationsOf(String verb)
     {
         ExternalDbOpenHelper dbOpenHelper = new ExternalDbOpenHelper(
@@ -204,6 +316,62 @@ public class DisplayConjugationActivity extends ActionBarActivity
             null
         );
 
+    }
+
+    /**
+     *
+     */
+    private void addComposedTense(
+        LinearLayout linearLayout,
+        int previousMode,
+        String verb
+    ) {
+        //TODO implement for other modes
+        if (previousMode != INDICATIVE_MODE) {
+           return; 
+        } 
+
+        String tenses[] = getResources().getStringArray(R.array.composedtenses);
+
+        String pastParticple = getPastParticiple(verb);
+
+        int currentTense = -1;
+        TableLayout oneTenseTable = null;
+
+        Cursor cursor = getAuxilliaryConjugation(verb);
+        for (cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()) {
+            boolean isNewTense = currentTense != cursor.getInt(TENSE_COLUMN);
+            currentTense = cursor.getInt(TENSE_COLUMN);
+
+            if (isNewTense && oneTenseTable != null) {
+                linearLayout.addView(oneTenseTable);
+            }
+            // insert a new line after a new tense
+            if (isNewTense) {
+                TextView textView = createTenseTitle(linearLayout);
+                textView.setText(tenses[currentTense]);
+                linearLayout.addView(textView);
+                oneTenseTable = createTenseLayout();
+            }
+
+            TableRow row = new TableRow(this);
+            String person = cursor.getString(PERSON_COLUMN);
+            addTextColumn(row, person + " ");
+            String radical = cursor.getString(RADICAL_COLUMN);
+            String suffix = cursor.getString(SUFFIX_COLUMN);
+            addConjugatedColumn(
+                row,
+                radical,
+                suffix
+            );
+            addTextColumn(row, " " + pastParticple);
+            oneTenseTable.addView(row);
+
+        }
+        if (oneTenseTable != null) {
+            linearLayout.addView(oneTenseTable);
+        }
+        cursor.close();
     }
 
     /**
