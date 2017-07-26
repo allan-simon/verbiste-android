@@ -1,4 +1,4 @@
-#Verbiste android 
+# Verbiste android 
 
 An open-source android application to get the conjugation of French verbs
 and to get back a verb from its conjugated form
@@ -9,20 +9,20 @@ in order to generate the database you need to run the python script
 cd utils ; python xml2sqlite.py
 ```
 
-#License
+# License
 
 The database is licensed under GPLv2 as required by verbiste project
 
 the code is licensed under MIT license (I need to add the 'official'
 copyright notice)
 
-#How the project has been created from command line and vim
+# How the project has been created from command line and vim
 
 first of all a lot of the command line can be found in the actual
 [android training guide](https://developer.android.com/training/index.html),
 so if a commands seems outdated, refers to that training guide
 
-##Requirements
+## Requirements
 
  * you have already downloaded the last android SDK
  * you have downloaded the Android Support Library
@@ -35,7 +35,7 @@ in your `PATH` variable, for me it was for example
  * you've added these environment variables `ANDROID_HOME` and `ANDROID_SDK`
 both pointing to the path of your SDK
 
-##Vim configuration
+## Vim configuration
 
     * git clone https://github.com/vim-scripts/javacomplete
     * git clone https://github.com/hsanson/vim-android
@@ -89,7 +89,7 @@ android update project --target 1 -p .
 ```
 
 
-##Compiling
+## Compiling
 
 from the command line ``ant debug```
 
