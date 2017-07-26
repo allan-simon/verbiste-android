@@ -59,7 +59,7 @@ and then use the command
 logcat color
 ```
 
-##Creating the project
+## Creating the project
 
 ```
 android create project \
