@@ -96,23 +96,27 @@ from the command line ``ant debug```
 for some obscure reason, make sure your path in `local.properties`
 is a **RELATIVE PATH**
 
-##Pushing the apk to a device
+## Pushing the apk to a device
 
 just plug in USB your device (be sure to have activated developer options) and then
 
 ```adb install -r bin/VerbisteAndroid-debug.apk```
 (`-r` is to indicate we want to reinstall)
 
-##Running app in debug mode
+## Running app in debug mode
 
 simply run the script ```./utils/debug.sh .```
 (see the file to if you need to understand the magic)
 
-##Running unit test
+## Running unit test
 
-##Check style
+TODO 
 
-#Thanks
+## Check style
+
+TODO
+
+# Thanks
 
 thanks to the verbiste project for collecting all the French verbs
 and their conjugation
