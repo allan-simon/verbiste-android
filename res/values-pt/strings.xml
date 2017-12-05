@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Verbiste Android</string>
+    <string name="activity_conjugation">Verbiste Android - Conjugação</string>
+    <string name="enter_verb">Insira um verbo em francês</string>
+    <string name="button_conjugate">Conjugar</string>
+
+    <string name="activity_deconjugation">Verbiste Android - Desconjugação</string>
+    <string name="enter_deconjugate">Insira um verbo conjugado</string>
+    <string name="button_deconjugate">Desconjugar</string>
+
+    <string-array name="modes">
+        <item>infinitivo</item>
+        <item>indicativo</item>
+        <item>condicional</item>
+        <item>subjuntivo</item>
+        <item>imperativo</item>
+        <item>particípio</item>
+    </string-array>
+
+    <string-array name="tenses">
+        <item>presente</item>
+        <item>presente</item>
+        <item>imperfeito</item>
+        <item>futuro</item>
+        <item>pretérito simple</item>
+        <item>presente</item>
+        <item>presente</item>
+        <item>pretérito</item>
+    </string-array>
+
+    <string-array name="composedtenses">
+        <item></item>
+        <item>pretérito composto</item>
+        <item>mais que perfeito</item>
+        <item>futuro perfeito</item>
+        <item>pretérito perfeito</item>
+    </string-array>
+</resources>
