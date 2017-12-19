@@ -1,4 +1,4 @@
-#Verbiste android 
+# Verbiste android 
 
 An open-source android application to get the conjugation of French verbs
 and to get back a verb from its conjugated form
@@ -9,20 +9,20 @@ in order to generate the database you need to run the python script
 cd utils ; python xml2sqlite.py
 ```
 
-#License
+# License
 
 The database is licensed under GPLv2 as required by verbiste project
 
 the code is licensed under MIT license (I need to add the 'official'
 copyright notice)
 
-#How the project has been created from command line and vim
+# How the project has been created from command line and vim
 
 first of all a lot of the command line can be found in the actual
 [android training guide](https://developer.android.com/training/index.html),
 so if a commands seems outdated, refers to that training guide
 
-##Requirements
+## Requirements
 
  * you have already downloaded the last android SDK
  * you have downloaded the Android Support Library
@@ -35,7 +35,7 @@ in your `PATH` variable, for me it was for example
  * you've added these environment variables `ANDROID_HOME` and `ANDROID_SDK`
 both pointing to the path of your SDK
 
-##Vim configuration
+## Vim configuration
 
     * git clone https://github.com/vim-scripts/javacomplete
     * git clone https://github.com/hsanson/vim-android
@@ -59,7 +59,7 @@ and then use the command
 logcat color
 ```
 
-##Creating the project
+## Creating the project
 
 ```
 android create project \
@@ -89,30 +89,34 @@ android update project --target 1 -p .
 ```
 
 
-##Compiling
+## Compiling
 
 from the command line ``ant debug```
 
 for some obscure reason, make sure your path in `local.properties`
 is a **RELATIVE PATH**
 
-##Pushing the apk to a device
+## Pushing the apk to a device
 
 just plug in USB your device (be sure to have activated developer options) and then
 
 ```adb install -r bin/VerbisteAndroid-debug.apk```
 (`-r` is to indicate we want to reinstall)
 
-##Running app in debug mode
+## Running app in debug mode
 
 simply run the script ```./utils/debug.sh .```
 (see the file to if you need to understand the magic)
 
-##Running unit test
+## Running unit test
 
-##Check style
+TODO 
 
-#Thanks
+## Check style
+
+TODO
+
+# Thanks
 
 thanks to the verbiste project for collecting all the French verbs
 and their conjugation
