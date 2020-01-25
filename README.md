@@ -59,7 +59,7 @@ and then use the command
 logcat color
 ```
 
-## Creating the project
+## Creating the project (Ant)
 
 ```
 android create project \
@@ -89,12 +89,17 @@ android update project --target 1 -p .
 ```
 
 
-## Compiling
+## Compiling (Ant)
 
-from the command line ``ant debug```
+from the command line ```ant debug```
 
 for some obscure reason, make sure your path in `local.properties`
 is a **RELATIVE PATH**
+
+## Compiling (gradle)
+
+from the command line ```./gradlew build```
+
 
 ## Pushing the apk to a device
 
