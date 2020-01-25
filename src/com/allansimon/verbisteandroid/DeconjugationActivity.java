@@ -3,6 +3,7 @@ package com.allansimon.verbisteandroid;
 import com.allansimon.verbisteandroid.MainActivity;
 import com.allansimon.verbisteandroid.ExternalDbOpenHelper;
 
+import android.os.Build;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.content.Intent;
@@ -65,7 +66,9 @@ public class DeconjugationActivity extends ActionBarActivity
     {
         LayoutInflater inflater = getLayoutInflater();
         TextView view = (TextView) inflater.inflate(R.layout.text_view, null);
-        view.setTextIsSelectable(true);
+        if (Build.VERSION.SDK_INT >= 11) {
+            view.setTextIsSelectable(true);
+        }
         view.setText(text);
         row.addView(view);
     }
