@@ -2,3 +2,16 @@ bin
 gen
 libs
 local.properties
+
+.idea/
+.gradle/
+build/
+app/app.iml
+
+*.apk
+*.ap_
+*.asc
+*.dex
+*.class
+*~
+
