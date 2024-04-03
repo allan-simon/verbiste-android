@@ -1,3 +1,5 @@
+# New maintained version here: https://github.com/allan-simon/verbiste-cordova
+
 # Verbiste android 
 
 An open-source android application to get the conjugation of French verbs
